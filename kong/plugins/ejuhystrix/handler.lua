@@ -11,6 +11,7 @@ local kong = kong
 
 
 local ejuhystrix = {}
+ejuhystrix.PRIORITY=120
 ejuhystrix.VERSION = "1.0"
 
 
