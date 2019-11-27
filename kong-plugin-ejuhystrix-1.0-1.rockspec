@@ -5,9 +5,9 @@ source = {
    tag = "1.0",
 }
 description = {
-   summary = "SSO Gateway",
+   summary = "hystrix",
    detailed = [[
-      SSO Gateway.
+      fallback.
    ]],
    homepage = "https://github.com/nixuw",
    license = "MIT/X11"

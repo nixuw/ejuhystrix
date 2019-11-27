@@ -5,7 +5,7 @@
 ---
 
 local cjson = require "cjson.safe"
--- local cjson = require "cjson"
+
 
 local kong = kong
 
@@ -15,15 +15,14 @@ ejuhystrix.PRIORITY=120
 ejuhystrix.VERSION = "1.0"
 
 
-
 function ejuhystrix:header_filter(conf)
     -- response code
     local respStatus = ngx.status
     if respStatus < conf.skipFilterWhenLess then
        return
     end
-    -- 清空header中的content-length
 
+    -- 清空header中的content-length
     ngx.header.content_length=nil
     ngx.header.content_type = "application/json; charset=utf-8"
 
@@ -32,8 +31,12 @@ end
 
 
 function ejuhystrix:body_filter(conf)
+    if ngx.ctx.eju_dont_do_anything then
+        return
+    end
 
-   -- response code
+
+     -- response code
     local respStatus = ngx.status
     if respStatus < conf.skipFilterWhenLess then
         return
@@ -50,13 +53,14 @@ function ejuhystrix:body_filter(conf)
         result = cjson.encode(resultJson)
     end
 
-
+    kong.log.err("response content is  ", ngx.status, ngx.arg[1] )
     ngx.arg[1] = result
 
     -- nginx内容是流式，多次输出，输出一次调用一次; 如果是错误，则结束流
      ngx.arg[2] = true
 
      kong.log.err("response status is  ", ngx.status, " replace to : " ,ngx.arg[1] )
+
 
 end
 
