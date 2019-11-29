@@ -19,8 +19,8 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-      ["kong.plugins.ejusso.handler"] = "kong/plugins/ejuhystrix/handler.lua",
-      ["kong.plugins.ejusso.schema"] = "kong/plugins/ejuhystrix/schema.lua"
+      ["kong.plugins.ejuhystrix.handler"] = "kong/plugins/ejuhystrix/handler.lua",
+      ["kong.plugins.ejuhystrix.schema"] = "kong/plugins/ejuhystrix/schema.lua"
      },
 
    }
